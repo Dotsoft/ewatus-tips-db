@@ -15,7 +15,7 @@ class CreateTipsTable extends Migration
         Schema::create('tips', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('category_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            // $table->integer('user_id')->unsigned();
             $table->json('title');
             $table->json('description');
             $table->timestamps();
