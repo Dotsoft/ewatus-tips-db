@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(array('prefix' => 'api/v1'), function()
+Route::group(['middleware' => 'localize', 'prefix' => 'api/v1'], function()
     {
         Route::resource('locales', 'LocaleController');
         Route::resource('categories', 'CategoryController');
