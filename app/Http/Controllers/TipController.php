@@ -120,6 +120,7 @@ class TipController extends Controller
            'title' => 'required|array',
            'description' => 'required|array',
            'category_id' => 'required|in:' . $category_ids_str,
+           'framing' => 'required|string',
         ]);
     }
 }

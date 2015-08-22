@@ -18,7 +18,7 @@ class Tip extends Model
    *
    * @var array
    */
-  protected $fillable = ['category_id', 'title', 'description'];
+  protected $fillable = ['category_id', 'title', 'description', 'framing'];
 
   /**
    * Get the tip's title attribute.
