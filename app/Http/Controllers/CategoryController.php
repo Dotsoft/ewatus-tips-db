@@ -44,12 +44,10 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        // $validator = $this->validator($data);
-        // if ($validator->fails()) {
-        //     return response($validator->messages(), 400);
-        // }
-        // $data['title'] = json_encode($data['title']);
-        // $data['description'] = json_encode($data['description']);
+        $validator = $this->validator($data);
+        if ($validator->fails()) {
+            return response($validator->messages(), 400);
+        }
         return Category::create($data);
     }
 
@@ -106,20 +104,20 @@ class CategoryController extends Controller
     }
 
     /**
-     * Get a validator.
-     *
-     * @param  array  $data
-     * @param  int  $id
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-     protected function validator(array $data, $id = 0)
-     {
-         $parent_ids = Category::whereNull('parent_id')->where('id', '<>', $id)->lists('id')->toArray();
-         $parent_ids_str = implode(',', $parent_ids);
-         return Validator::make($data, [
-             'title' => 'required',
-             'description' => 'required',
-             'parent_id' => 'sometimes|in:' . $parent_ids_str
-         ]);
-     }
+    * Get a validator.
+    *
+    * @param  array  $data
+    * @param  int  $id
+    * @return \Illuminate\Contracts\Validation\Validator
+    */
+    protected function validator(array $data, $id = 0)
+    {
+        $parent_ids = Category::whereNull('parent_id')->where('id', '<>', $id)->lists('id')->toArray();
+        $parent_ids_str = implode(',', $parent_ids);
+        return Validator::make($data, [
+           'title' => 'required|array',
+           'description' => 'required|array',
+           'parent_id' => 'sometimes|in:' . $parent_ids_str
+        ]);
+    }
 }
